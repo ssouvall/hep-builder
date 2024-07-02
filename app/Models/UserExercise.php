@@ -9,6 +9,14 @@ class UserExercise extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'exercise_id', 
+        'sets',
+        'reps',
+        'notes'
+    ];
+
     public function exercise()
     {
         return $this->belongsTo(Exercise::class);

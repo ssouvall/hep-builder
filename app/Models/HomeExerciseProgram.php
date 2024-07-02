@@ -9,6 +9,10 @@ class HomeExerciseProgram extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title'
+    ];
+
     public function userExercises()
     {
         return $this->belongsToMany(UserExercise::class, 'home_exercise_program_user_exercise', 'home_exercise_program_id', 'user_exercise_id');

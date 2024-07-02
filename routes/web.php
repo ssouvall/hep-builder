@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\UserExerciseController;
+use App\Http\Controllers\HomeExerciseProgramController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,5 +30,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('exercises', ExerciseController::class);
+Route::resource('patients', PatientController::class);
+Route::resource('providers', ProviderController::class);
+Route::resource('user-exercises', UserExerciseController::class);
+Route::resource('home-exercise-programs', HomeExerciseProgramController::class);
 
 require __DIR__.'/auth.php';
