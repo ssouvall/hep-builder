@@ -98,6 +98,21 @@ class HomeExerciseProgramController extends Controller
                          ->with('success', 'Program updated successfully.');
     }
 
+    public function addUserExercises(Request $request, HomeExerciseProgram $homeExerciseProgram)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'user_exercise_ids' => 'required|array', // Array of user exercise ids
+            'user_exercise_ids.*' => 'exists:user_exercises,id', // Each id must exist in user_exercises table
+        ]);
+
+        // Attach the user exercises to the home exercise program
+        $homeExerciseProgram->userExercises()->attach($request->user_exercise_ids);
+
+        // Optionally, return a response indicating success
+        return response()->json(['message' => 'User exercises added successfully'], 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
