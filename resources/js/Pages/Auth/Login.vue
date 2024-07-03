@@ -76,7 +76,7 @@ const submit = () => {
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <!--<div class="flex items-center justify-end mt-4">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
@@ -85,9 +85,44 @@ const submit = () => {
                     Forgot your password?
                 </Link>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <Link
+                    :href="route('register')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Sign up
+                </Link>
+
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </PrimaryButton>
+            </div>
+            -->
+            <PrimaryButton
+                class="w-full mt-2"
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+            >
+                Log in
+            </PrimaryButton>
+
+            <div class="flex flex-col items-center">
+                <Link
+                    v-if="canResetPassword"
+                    :href="route('password.request')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-2"
+                >
+                    Forgot your password?
+                </Link>
+
+                <div class="flex items-center justify-center mt-2">
+                    <span class="text-sm text-gray-600">Don't have an account?</span>
+                    <Link
+                        :href="route('register')"
+                        class="ml-1 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Sign up
+                    </Link>
+                </div>
             </div>
         </form>
     </GuestLayout>
