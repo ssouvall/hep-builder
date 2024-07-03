@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ExerciseController extends Controller
 {
@@ -15,7 +16,8 @@ class ExerciseController extends Controller
     public function index()
     {
         $exercises = Exercise::all();
-        return view('exercises.index', compact('exercises'));
+        return Inertia::render('Exercise/Index', ['exercises' => $exercises]);
+        // return view('exercises.index', compact('exercises'));
     }
 
     /**
