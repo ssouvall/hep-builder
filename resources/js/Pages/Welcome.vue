@@ -66,7 +66,7 @@ function handleImageError() {
                 </header>
 
                 <main class="mt-6">
-                    <div class="grid gap-6 lg:grid-cols-2 lg:gap-8 h-screen">
+                    <div class="grid gap-6 lg:grid-cols-2 lg:gap-8 lg:h-screen">
                         <div class="flex flex-col items-start gap-6 overflow-hidden p-6 ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                             <div class="container py-5">
                                 <div class="text-center md:text-left">
@@ -77,12 +77,18 @@ function handleImageError() {
                                         Digital Exercise Programs for Busy Patients and Providers
                                     </h2>
                                     <div class="flex flex-wrap">
-                                        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full mr-4 mb-4 md:mb-0">
+                                        <Link
+                                            v-if="canRegister"
+                                            :href="route('register')"
+                                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 ml-3 rounded-full mr-4 mb-4 md:mb-0"
+                                        >
                                             Register
-                                        </button>
-                                        <button class="border border-blue-500 hover:bg-blue-500 hover:text-white text-blue-500 font-bold py-3 px-6 rounded-full mb-4 md:mb-0">
+                                        </Link>
+                                         <Link
+                                            class="border border-blue-500 hover:bg-blue-500 hover:text-white text-blue-500 font-bold py-3 px-6 rounded-full mb-4 md:mb-0"
+                                        >
                                             Learn More
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
