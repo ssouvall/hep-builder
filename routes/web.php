@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeExerciseProgramController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Exercise;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -20,7 +21,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $exercises = Exercise::all();
+    return Inertia::render('Dashboard', ['exercises' => $exercises]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/home-exercise-programs/{homeExerciseProgram}/add-user-exercises', [HomeExerciseProgramController::class, 'addUserExercises'])

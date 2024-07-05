@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 defineProps({
     canLogin: {
@@ -35,7 +36,7 @@ function handleImageError() {
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
                     <div class="flex items-center">
-                        <img src="/img/hep_builder_logo.svg" alt="Logo">
+                        <ApplicationLogo />
                     </div>
                     <nav v-if="canLogin" class="lg:col-span-2 lg:col-start-3 flex justify-end">
                         <Link
