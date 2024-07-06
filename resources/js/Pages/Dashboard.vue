@@ -13,6 +13,7 @@ const imageSrc = "/img/hep_builder_landing.png";
 
 // State for selected exercises
 const selectedExercises = ref([]);
+const searchedExercises = ref([]);
 
 // Method to add an exercise to the selectedExercises array
 const addExercise = (exercise) => {
@@ -20,6 +21,14 @@ const addExercise = (exercise) => {
     selectedExercises.value.push(exercise);
   }
 };
+
+const searchExercises = (searchString) => {
+    console.log(selectedExercises)
+    const matchingExercises = selectedExercises.value.filter(e => e.title.includes(searchString));
+    searchedExercises.value = matchingExercises;
+}
+
+searchedExercises.value = props.exercises;
 </script>
 
 <template>
@@ -31,12 +40,12 @@ const addExercise = (exercise) => {
     </template>
 
     <div class="p-12 bg-gray-100">
-      <ExerciseSearch />
+      <ExerciseSearch :search="searchExercises" />
 
       <div class="container mx-auto flex">
         <div class="flex-1 mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <ExerciseCard
-            v-for="exercise in exercises"
+            v-for="exercise in searchedExercises"
             :key="exercise.id"
             :exercise="exercise"
             :imageSrc="imageSrc"
