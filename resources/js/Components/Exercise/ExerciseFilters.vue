@@ -2,10 +2,8 @@
   <div>
     <!-- Sidenav for md and greater breakpoints -->
     
-      <aside class="hidden md:flex flex-col w-64 bg-white h-full fixed p-12">
-        <!--<ExerciseFilters />-->
+      <aside class="hidden md:flex flex-col w-64 w-0 bg-white h-full md:fixed p-12">
         <h3 class="font-semibold text-lg mb-4">Filters</h3>
-        <!-- Add your filters here -->
         <div>
           <label>
             <input type="checkbox" v-model="filters.category1">

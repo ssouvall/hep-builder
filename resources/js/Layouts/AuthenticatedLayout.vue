@@ -97,22 +97,17 @@ const showingNavigationDropdown = ref(false);
     </nav>
 
     <!-- Page Heading -->
-    <header class="bg-white shadow fixed w-full top-16 z-10 border-t-2" v-if="$slots.header">
+    <!--<header class="bg-white shadow fixed w-full top-16 z-10 border-t-2" v-if="$slots.header">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <slot name="header" />
       </div>
-    </header>
+    </header>-->
 
-    <div class="flex flex-1 pt-28">
-      <ExerciseFilters />
-      <main class="flex-1 ml-0 md:ml-64 overflow-y-auto">
+    <div class="flex flex-1 pt-14">
+      <!--<ExerciseFilters />-->
+      <main class="flex-1 ml-0 overflow-y-auto mr-[40rem]">
         <slot />
       </main>
-      <!--<nav class="flex w-1/2 h-full bg-yellow-400">
-        <div class="w-full flex mx-auto px-6 py-8">
-          <div class="w-full h-full flex items-center justify-center text-gray-900 text-xl border-4 border-gray-900 border-dashed">Rightbar</div>
-        </div>
-      </nav>-->
     </div>
   </div>
 </template>

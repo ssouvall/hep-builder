@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1>My Inertia CRUD blah blah blah</h1>
+  <h1>My Inertia CRUD</h1>
   <table>
     <thead>
       <tr>
