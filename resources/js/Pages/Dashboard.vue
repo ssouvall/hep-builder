@@ -22,7 +22,8 @@ const addExercise = (exercise) => {
 };
 
 const searchExercises = (searchString) => {
-    const matchingExercises = selectedExercises.value.filter(e => e.title.includes(searchString));
+    const matchingExercises = props.exercises.filter(e => e.title?.toLowerCase().includes(searchString?.toLowerCase()));
+    console.log(props.exercises)
     searchedExercises.value = matchingExercises;
 }
 
