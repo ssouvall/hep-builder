@@ -105,7 +105,7 @@ const showingNavigationDropdown = ref(false);
 
     <div class="flex flex-1 pt-14 h-screen">
       <!--<ExerciseFilters />-->
-      <main class="flex-1 ml-0 mr-[40rem] overflow-hidden pt-2">
+      <main class="flex-1 ml-0 lg:mr-[30rem] xl:mr-[40rem] overflow-hidden pt-2">
         <slot />
       </main>
     </div>

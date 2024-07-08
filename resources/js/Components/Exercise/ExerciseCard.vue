@@ -5,7 +5,7 @@
       <div class="font-bold text-app-blue text-md mb-2 text-center">{{ truncateString(exerciseName, 15) }}</div>
     </div>
     <button
-      class="btn overflow-hidden relative w-full bg-app-blue text-white py-1 px-1 rounded-lg font-bold uppercase -- before:block before:absolute before:h-full before:w-full before:bg-blue-900 before:left-0 before:top-0 before:-translate-y-full hover:before:translate-y-0 before:transition-transform"
+      class="btn overflow-hidden relative w-full bg-white lg:bg-app-blue text-app-blue lg:text-white border-2 border-app-blue lg:border-0 py-1 px-1 rounded-lg font-bold uppercase -- before:block before:absolute before:h-full before:w-full before:bg-blue-900 before:left-0 before:top-0 before:-translate-y-full xl:hover:bg-blue-900 active:bg-app-blue active:text-white xl:active:bg-white xl:active:text-app-blue xl:active:border-2 xl:active:border-app-blue before:transition-transform"
       @click="$emit('add-exercise', exercise)"
     >
       <span class="relative">Add +</span>

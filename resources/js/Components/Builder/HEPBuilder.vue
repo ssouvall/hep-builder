@@ -1,5 +1,5 @@
 <template>
-  <div class="relative text-center max-h-screen w-full p-4 bg-white">
+  <div class="relative text-center max-h-screen w-full p-4 mt-6 bg-white">
     <h1 class="text-xl mb-6">Home Exercise Program Builder</h1>
     <input 
       v-model="name" 
@@ -12,33 +12,33 @@
       <div v-if="selectedItems?.length === 0">
         <NoExercisesAdded />
       </div>
-      <div v-else v-for="item in selectedItems" :key="item.id" class="w-full flex items-center bg-white shadow p-4 mb-4 rounded-lg h-40">
+      <div v-else v-for="item in selectedItems" :key="item.id" class="w-full flex grid grid-cols-6 items-center bg-white shadow p-4 mb-4 rounded-lg h-70">
         <!-- Image -->
-        <div class="w-1/8 h-24 flex-shrink-0">
+        <div class="col-span-1 h-24 flex-shrink-0">
           <img :src="item.image" alt="Item Image" class="h-24 w-32 object-cover rounded-l-lg" />
         </div>
 
         <!-- Item Details -->
-        <div class="w-6/8 px-4">
+        <div class="col-span-4 px-4">
           <div class="text-center font-semibold mb-2">{{ item.title }}</div>
           <div class="grid grid-cols-2 gap-2">
-            <div class="flex items-center">
-              <label :for="'weekly-' + item.id" class="text-sm font-medium text-gray-700 mr-2">x Weekly:</label>
+            <div class="block items-center">
+              <label :for="'weekly-' + item.id" class="text-sm font-medium text-gray-700 mr-2">Weekly:</label>
               <input v-model="item.weekly" :id="'weekly-' + item.id" type="number" class="p-1 border border-gray-300 rounded w-16" />
             </div>
-            <div class="flex items-center">
-              <label :for="'daily-' + item.id" class="text-sm font-medium text-gray-700 mr-2">x Daily:</label>
+            <div class="block items-center">
+              <label :for="'daily-' + item.id" class="text-sm font-medium text-gray-700 mr-2">Daily:</label>
               <input v-model="item.daily" :id="'daily-' + item.id" type="number" class="p-1 border border-gray-300 rounded w-16" />
             </div>
-            <div class="flex items-center">
+            <div class="block items-center">
               <label :for="'sets-' + item.id" class="text-sm font-medium text-gray-700 mr-2">Sets:</label>
               <input v-model="item.sets" :id="'sets-' + item.id" type="number" class="p-1 border border-gray-300 rounded w-16" />
             </div>
-            <div class="flex items-center">
+            <div class="block items-center">
               <label :for="'reps-' + item.id" class="text-sm font-medium text-gray-700 mr-2">Reps:</label>
               <input v-model="item.reps" :id="'reps-' + item.id" type="number" class="p-1 border border-gray-300 rounded w-16" />
             </div>
-            <div class="flex items-center">
+            <div class="block items-center">
               <label :for="'hold-' + item.id" class="text-sm font-medium text-gray-700 mr-2">Hold:</label>
               <input v-model="item.hold" :id="'hold-' + item.id" type="number" class="p-1 border border-gray-300 rounded w-16" />
             </div>
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Remove Button -->
-        <div class="w-1/8 flex-shrink-0 flex justify-center items-center">
+        <div class="col-span-1 flex-shrink-0 flex justify-center items-center">
           <button @click="removeItem(item.id)" class="text-red-500 hover:text-red-700">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -121,10 +121,10 @@ const exportAsPDF = async () => {
         </div>
         <div style="flex: 1; display: flex; flex-wrap: wrap; padding-left: 10px;">
           <div style="width: 50%; padding: 5px;">
-            x Weekly: ${item.weekly || ''}
+            Weekly: ${item.weekly || ''}
           </div>
           <div style="width: 50%; padding: 5px;">
-            x Daily: ${item.daily || ''}
+            Daily: ${item.daily || ''}
           </div>
           <div style="width: 50%; padding: 5px;">
             Sets: ${item.sets || ''}

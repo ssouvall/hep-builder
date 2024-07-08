@@ -28,6 +28,17 @@ const searchExercises = (searchString) => {
 }
 
 searchedExercises.value = props.exercises;
+
+const isRightAsideOpen = ref(false);
+
+const toggleRightAside = () => {
+  isRightAsideOpen.value = !isRightAsideOpen.value;
+};
+
+const closeRightAside = () => {
+  isRightAsideOpen.value = false;
+};
+
 </script>
 
 <template>
@@ -42,7 +53,7 @@ searchedExercises.value = props.exercises;
       <ExerciseSearch :search="searchExercises" />
 
       <div class="container mx-auto flex">
-        <div class="flex-1 mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex-1 mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           <ExerciseCard
             v-for="exercise in searchedExercises"
             :key="exercise.id"
@@ -54,7 +65,27 @@ searchedExercises.value = props.exercises;
         </div>
       </div>
     </div>
-    <RightAside :selectedExercises="selectedExercises" />
+    <div @click="toggleRightAside" class="flex lg:hidden justify-between h-[6vh] px-12 py-4 bg-app-blue absolute bottom-0 w-full rounded-t-lg text-white text-lg font-bold">
+      <div>{{`${selectedExercises?.length} exercises added`}}</div>
+      <div>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          class="h-6 w-6"
+        >
+          <path 
+            d="M6 9l6 6 6-6" 
+          />
+        </svg>
+
+      </div>
+    </div>
+    <RightAside :selectedExercises="selectedExercises" :open="isRightAsideOpen" :close="closeRightAside" />
   </AuthenticatedLayout>
 </template>
 
