@@ -9,7 +9,6 @@ import RightAside from '@/Components/RightAside.vue';
 const props = defineProps({
   exercises: Array
 });
-const imageSrc = "/img/hep_builder_landing.png";
 
 // State for selected exercises
 const selectedExercises = ref([]);
@@ -47,7 +46,7 @@ searchedExercises.value = props.exercises;
             v-for="exercise in searchedExercises"
             :key="exercise.id"
             :exercise="exercise"
-            :imageSrc="imageSrc"
+            :imageSrc="exercise.image"
             :exerciseName="exercise.title"
             @add-exercise="addExercise"
           />

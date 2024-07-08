@@ -12,7 +12,7 @@
       <div v-for="item in selectedItems" :key="item.id" class="w-full flex items-center bg-white shadow p-4 mb-4 rounded-lg h-40">
         <!-- Image -->
         <div class="w-1/8 h-24 flex-shrink-0">
-          <img src="/img/hep_builder_landing.png" alt="Item Image" class="h-full w-full object-cover rounded-l-lg" />
+          <img :src="item.image" alt="Item Image" class="h-24 w-32 object-cover rounded-l-lg" />
         </div>
 
         <!-- Item Details -->
@@ -113,7 +113,7 @@ const exportAsPDF = async () => {
       </div>
       <div style="display: flex; margin-bottom: 10px;">
         <div style="flex: 1;">
-          <img src="/img/hep_builder_landing.png" alt="Item Image" style="width: 100%; height: auto; object-fit: cover;">
+          <img src=${item.image} alt="Item Image" style="width: 100%; height: auto; object-fit: cover;">
         </div>
         <div style="flex: 1; display: flex; flex-wrap: wrap; padding-left: 10px;">
           <div style="width: 50%; padding: 5px;">
