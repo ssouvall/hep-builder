@@ -37,11 +37,11 @@ searchedExercises.value = props.exercises;
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">HEP Builder</h2>
     </template>
 
-    <div class="p-12 bg-gray-100">
+    <div class="p-12 pb-24 bg-gray-100 h-screen overflow-y-scroll">
       <ExerciseSearch :search="searchExercises" />
 
       <div class="container mx-auto flex">
-        <div class="flex-1 mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="flex-1 mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <ExerciseCard
             v-for="exercise in searchedExercises"
             :key="exercise.id"
@@ -56,3 +56,4 @@ searchedExercises.value = props.exercises;
     <RightAside :selectedExercises="selectedExercises" />
   </AuthenticatedLayout>
 </template>
+

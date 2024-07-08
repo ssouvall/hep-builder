@@ -8,8 +8,11 @@
       class="mb-4 p-2 border border-gray-300 rounded w-full"
     />
 
-    <div class="max-h-full overflow-y-scroll pb-64">
-      <div v-for="item in selectedItems" :key="item.id" class="w-full flex items-center bg-white shadow p-4 mb-4 rounded-lg h-40">
+    <div class="max-h-full h-full overflow-y-scroll pb-64">
+      <div v-if="selectedItems?.length === 0">
+        <NoExercisesAdded />
+      </div>
+      <div v-else v-for="item in selectedItems" :key="item.id" class="w-full flex items-center bg-white shadow p-4 mb-4 rounded-lg h-40">
         <!-- Image -->
         <div class="w-1/8 h-24 flex-shrink-0">
           <img :src="item.image" alt="Item Image" class="h-24 w-32 object-cover rounded-l-lg" />
@@ -73,6 +76,7 @@ import { ref } from 'vue';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { getFormattedDate } from '@/utils/dateUtils';
+import NoExercisesAdded from '@/Components/Builder/NoExercisesAdded.vue';
 
 const props = defineProps({
   selectedItems: Array
