@@ -37,7 +37,7 @@ searchedExercises.value = props.exercises;
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">HEP Builder</h2>
     </template>
 
-    <div class="p-12 pb-24 bg-gray-100 h-screen overflow-y-scroll">
+    <div class="p-12 pb-24 bg-gray-100 h-[90vh] overflow-y-scroll">
       <ExerciseSearch :search="searchExercises" />
 
       <div class="container mx-auto flex">
@@ -56,4 +56,5 @@ searchedExercises.value = props.exercises;
     <RightAside :selectedExercises="selectedExercises" />
   </AuthenticatedLayout>
 </template>
+
 

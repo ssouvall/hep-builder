@@ -58,15 +58,15 @@
 
     <div class="sticky bottom-0 left-0 right-0 bg-white p-4">
       <button @click="exportAsPDF"
-        class="btn overflow-hidden relative w-1/2 bg-white text-app-blue py-1 px-1 border-app-blue border-2 rounded-l-lg font-bold uppercase"
+        class="btn overflow-hidden relative w-full bg-white text-app-blue py-1 px-1 border-app-blue border-2 rounded-lg font-bold uppercase"
       >
         Export as PDF
       </button>
-      <button 
+      <!--<button 
         class="btn overflow-hidden relative w-1/2 bg-app-blue text-white py-1 px-1 border-app-blue border-2 rounded-r-lg font-bold uppercase"
       >
         Save
-      </button>
+      </button>-->
     </div>
   </div>
 </template>

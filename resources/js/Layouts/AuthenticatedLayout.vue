@@ -26,9 +26,9 @@ const showingNavigationDropdown = ref(false);
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <!--<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
               <NavLink :href="route('dashboard')" :active="route().current('dashboard')">HEP Builder</NavLink>
-            </div>
+            </div>-->
           </div>
 
           <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -51,7 +51,7 @@ const showingNavigationDropdown = ref(false);
                   </span>
                 </template>
 
-                <template #content>
+                <template #content display>
                   <DropdownLink :href="route('profile.edit')">Profile</DropdownLink>
                   <DropdownLink :href="route('logout')" method="post" as="button">Log Out</DropdownLink>
                 </template>
