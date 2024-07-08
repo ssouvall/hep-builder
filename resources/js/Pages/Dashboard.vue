@@ -23,7 +23,6 @@ const addExercise = (exercise) => {
 };
 
 const searchExercises = (searchString) => {
-    console.log(selectedExercises)
     const matchingExercises = selectedExercises.value.filter(e => e.title.includes(searchString));
     searchedExercises.value = matchingExercises;
 }
