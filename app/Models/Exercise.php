@@ -14,6 +14,12 @@ class Exercise extends Model
         'description',
         'instructions',
         'image',
-        'isPrivate'
+        'isPrivate',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

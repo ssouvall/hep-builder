@@ -3,18 +3,20 @@ import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import ExerciseCard from '@/Components/Exercise/ExerciseCard.vue';
+import CreateExerciseCard from '@/Components/Exercise/CreateExerciseCard.vue';
 import ExerciseSearch from '@/Components/Exercise/ExerciseSearch.vue';
 import RightAside from '@/Components/RightAside.vue';
+import ExerciseDetailsModal from '@/Components/Exercise/ExerciseDetailsModal.vue';
+import CreateExerciseModal from '@/Components/Exercise/CreateExerciseModal.vue';
 
 const props = defineProps({
   exercises: Array
 });
 
-// State for selected exercises
 const selectedExercises = ref([]);
 const searchedExercises = ref([]);
+const selectedExercise = ref(null);
 
-// Method to add an exercise to the selectedExercises array
 const addExercise = (exercise) => {
   if (!selectedExercises.value.some(e => e.id === exercise.id)) {
     selectedExercises.value.push(exercise);
@@ -30,6 +32,15 @@ const searchExercises = (searchString) => {
 searchedExercises.value = props.exercises;
 
 const isRightAsideOpen = ref(false);
+const isCreateExerciseModalOpen = ref(false);
+
+const openCreateExerciseModal = () => {
+  isCreateExerciseModalOpen.value = true;
+};
+
+const closeCreateExerciseModal = () => {
+  isCreateExerciseModalOpen.value = false;
+};
 
 const toggleRightAside = () => {
   isRightAsideOpen.value = !isRightAsideOpen.value;
@@ -37,6 +48,14 @@ const toggleRightAside = () => {
 
 const closeRightAside = () => {
   isRightAsideOpen.value = false;
+};
+
+const openExerciseModal = (exercise) => {
+  selectedExercise.value = exercise;
+};
+
+const closeExerciseModal = () => {
+  selectedExercise.value = null;
 };
 
 </script>
@@ -54,12 +73,16 @@ const closeRightAside = () => {
 
       <div class="container mx-auto flex">
         <div class="flex-1 mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <CreateExerciseCard 
+            :onClickNewExerciseButton="openCreateExerciseModal"
+          />
           <ExerciseCard
             v-for="exercise in searchedExercises"
             :key="exercise.id"
             :exercise="exercise"
             :imageSrc="exercise.image"
             :exerciseName="exercise.title"
+            @select-exercise="openExerciseModal"
             @add-exercise="addExercise"
           />
         </div>
@@ -86,6 +109,18 @@ const closeRightAside = () => {
       </div>
     </div>
     <RightAside :selectedExercises="selectedExercises" :open="isRightAsideOpen" :close="closeRightAside" />
+
+    <ExerciseDetailsModal 
+      v-if="selectedExercise"
+      :exercise="selectedExercise"
+      :is-open="!!selectedExercise"
+      :on-close="closeExerciseModal"
+    />
+    <CreateExerciseModal
+      v-if="isCreateExerciseModalOpen"
+      :is-open="isCreateExerciseModalOpen"
+      :on-close="closeCreateExerciseModal"      
+    />
   </AuthenticatedLayout>
 </template>
 

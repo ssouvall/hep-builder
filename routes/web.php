@@ -21,7 +21,14 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $exercises = Exercise::all();
+    $userId = Auth::id();
+    $exercises = Exercise::where(function ($query) use ($userId) {
+        $query->where('isPrivate', false)
+              ->orWhere(function ($query) use ($userId) {
+                  $query->where('isPrivate', true)
+                        ->where('user_id', $userId);
+              });
+    })->get();
     return Inertia::render('Dashboard', ['exercises' => $exercises]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

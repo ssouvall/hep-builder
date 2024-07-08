@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
@@ -38,17 +39,22 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'instructions' => 'required',
-            // Add more validation rules as needed
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'instructions' => 'required|string',
         ]);
-
-        Exercise::create($request->all());
-
-        return redirect()->route('exercises.index')
-            ->with('success', 'Exercise created successfully.');
+    
+        $exercise = new Exercise();
+        $exercise->title = $validatedData['title'];
+        $exercise->description = $validatedData['description'];
+        $exercise->instructions = $validatedData['instructions'];
+        $exercise->isPrivate = true;
+        $exercise->user_id = Auth::id();
+    
+        $exercise->save();
+    
+        return response()->json(['message' => 'Exercise created successfully'], 201);
     }
 
     /**
