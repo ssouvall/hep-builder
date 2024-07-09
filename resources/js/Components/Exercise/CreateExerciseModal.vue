@@ -93,8 +93,6 @@
           "type": "success",
           "position": "top-center"
         })
-
-        props.refreshExercises();
     } catch (error) {
         isLoading.value = false;
         console.error('Error creating exercise:', error);

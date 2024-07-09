@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, usePage, router } from '@inertiajs/vue3';
 import ExerciseCard from '@/Components/Exercise/ExerciseCard.vue';
 import CreateExerciseCard from '@/Components/Exercise/CreateExerciseCard.vue';
 import ExerciseSearch from '@/Components/Exercise/ExerciseSearch.vue';
@@ -31,6 +31,23 @@ const searchExercises = (searchString) => {
     searchedExercises.value = matchingExercises;
 }
 
+const fetchExercises = async () => {
+  try {
+    router.get('/exercises', {}, {
+      preserveState: true,
+      onSuccess: (page) => {
+        if (page.props.exercises && page.props.exercises.length > 0) {
+          props.exercises.value = page.props.exercises;
+          searchedExercises.value = page.props.exercises;
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error('Error fetching exercises:', error);
+  } 
+};
+
 searchedExercises.value = props.exercises;
 
 const isRightAsideOpen = ref(false);
@@ -42,6 +59,7 @@ const openCreateExerciseModal = () => {
 
 const closeCreateExerciseModal = () => {
   isCreateExerciseModalOpen.value = false;
+  fetchExercises();
 };
 
 const toggleRightAside = () => {
@@ -58,6 +76,7 @@ const openExerciseModal = (exercise) => {
 
 const closeExerciseModal = () => {
   selectedExercise.value = null;
+  fetchExercises();
 };
 
 </script>
