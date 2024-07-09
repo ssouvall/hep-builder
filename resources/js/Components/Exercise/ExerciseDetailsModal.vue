@@ -8,14 +8,14 @@
               </svg>
           </button>
           <div v-if="canEdit">
-            <button 
+            <!---<button 
               @click="closeModal" 
               class="btn overflow-hidden relative w-18 bg-app-blue text-white border-2 border-app-blue py-1 px-1 rounded-lg font-bold before:block before:absolute before:h-full before:w-full before:bg-blue-900 before:left-0 before:top-0 before:-translate-y-full xl:hover:bg-blue-900 xl:hover:border-blue-900 active:bg-app-blue active:text-white xl:active:bg-white xl:active:text-app-blue xl:active:border-2 xl:active:border-app-blue before:transition-transform"
             >
               Edit
-            </button>
+            </button>-->
             <button 
-              @click="closeModal" 
+              @click="deleteExercise" 
               class="btn ml-3 overflow-hidden relative w-18 bg-red-600 text-white border-2 border-red-600 py-1 px-1 rounded-lg font-bold before:block before:absolute before:h-full before:w-full before:bg-blue-900 before:left-0 before:top-0 before:-translate-y-full xl:hover:bg-blue-900 xl:hover:border-blue-900 active:bg-app-blue active:text-white xl:active:bg-white xl:active:text-app-blue xl:active:border-2 xl:active:border-app-blue before:transition-transform"
             >
               Delete
@@ -43,7 +43,8 @@
   </template>
   
   <script setup>
-  import { ref, defineProps } from 'vue';
+  import { useForm } from '@inertiajs/vue3';
+  import { toast } from "vue3-toastify";
   
   const props = defineProps({
     exercise: Object,
@@ -61,9 +62,22 @@
   const editExercise = () => {
     // Handle edit exercise
   };
+  
+  const form = useForm({});
 
   const deleteExercise = () => {
-      // Handle delete exercise
+    if (confirm('Are you sure you want to delete this exercise?')) {
+      form.delete(`/exercises/${props.exercise.id}`, {
+        onSuccess: () => {
+            closeModal();
+            toast("Exercise Successfully Deleted!", {
+            "theme": "auto",
+            "type": "success",
+            "position": "top-center"
+          })
+        },
+      });
+    }
   };
 
   const setBackupImage = (event) => {

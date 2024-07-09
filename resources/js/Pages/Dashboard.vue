@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import ExerciseCard from '@/Components/Exercise/ExerciseCard.vue';
@@ -28,7 +28,6 @@ const addExercise = (exercise) => {
 
 const searchExercises = (searchString) => {
     const matchingExercises = props.exercises.filter(e => e.title?.toLowerCase().includes(searchString?.toLowerCase()));
-    console.log(props.exercises)
     searchedExercises.value = matchingExercises;
 }
 
@@ -123,7 +122,7 @@ const closeExerciseModal = () => {
     <CreateExerciseModal
       v-if="isCreateExerciseModalOpen"
       :is-open="isCreateExerciseModalOpen"
-      :on-close="closeCreateExerciseModal"      
+      :on-close="closeCreateExerciseModal"
     />
   </AuthenticatedLayout>
 </template>

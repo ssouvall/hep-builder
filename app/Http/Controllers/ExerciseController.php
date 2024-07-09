@@ -16,9 +16,15 @@ class ExerciseController extends Controller
      */
     public function index()
     {
-        $exercises = Exercise::all();
-        return Inertia::render('Exercise/Index', ['exercises' => $exercises]);
-        // return view('exercises.index', compact('exercises'));
+        $userId = Auth::id();
+        $exercises = Exercise::where(function ($query) use ($userId) {
+            $query->where('isPrivate', false)
+                  ->orWhere(function ($query) use ($userId) {
+                      $query->where('isPrivate', true)
+                            ->where('user_id', $userId);
+                  });
+        })->get();
+        return Inertia::render('Dashboard', ['exercises' => $exercises, 'userId' => $userId]);
     }
 
     /**
@@ -64,7 +70,15 @@ class ExerciseController extends Controller
             'user_id' => Auth::id(), 
         ]);
     
-        return redirect()->route('dashboard')->with('success', 'Exercise created successfully!');
+        $userId = Auth::id();
+        $exercises = Exercise::where(function ($query) use ($userId) {
+            $query->where('isPrivate', false)
+                  ->orWhere(function ($query) use ($userId) {
+                      $query->where('isPrivate', true)
+                            ->where('user_id', $userId);
+                  });
+        })->get();
+        return Inertia::render('Dashboard', ['exercises' => $exercises, 'userId' => $userId]);
     }
 
     /**
@@ -119,9 +133,12 @@ class ExerciseController extends Controller
      */
     public function destroy(Exercise $exercise)
     {
+        if ($exercise->user_id !== Auth::id()) {
+            return redirect()->route('dashboard')->with('error', 'You are not authorized to delete this exercise.');
+        }
+
         $exercise->delete();
 
-        return redirect()->route('exercises.index')
-            ->with('success', 'Exercise deleted successfully.');
+        return redirect()->route('dashboard')->with('success', 'Exercise deleted successfully!');
     }
 }

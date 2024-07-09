@@ -61,7 +61,7 @@
   const props = defineProps({
     exercise: Object,
     isOpen: Boolean,
-    onClose: Function,
+    onClose: Function
   });
 
   const imagePreviewUrl = ref(null);
@@ -93,6 +93,8 @@
           "type": "success",
           "position": "top-center"
         })
+
+        props.refreshExercises();
     } catch (error) {
         isLoading.value = false;
         console.error('Error creating exercise:', error);
