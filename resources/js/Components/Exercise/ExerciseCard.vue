@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-sm w-full bg-white p-3 rounded-lg overflow-hidden shadow-lg h-[250px]">
-    <img :src="imageSrc" alt="Exercise Image" class="w-full h-1/2 object-cover border-b-2">
+    <img :src="exerciseImage" alt="Exercise Image" class="w-full h-1/2 object-cover border-b-2" @error="setBackupImage">
     <div class="px-2 py-4 text-center">
       <button
         class="font-bold text-app-blue text-md mb-2 text-center"
@@ -42,6 +42,13 @@ const props = defineProps({
     required: true
   }
 });
+
+const exerciseImage = props.imageSrc || 'img/ImgPlaceholder.png';
+
+const setBackupImage = (event) => {
+  event.target.src = '/img/ImgPlaceholder.png';
+};
+
 </script>
 
 <style scoped>

@@ -4,7 +4,7 @@
     @click.self="closeMenu"
   >
     <div class="pt-4">
-      <div @click="closeMenu" class="flex lg:hidden justify-between h-[6vh] px-12 py-6 mt-12 bg-app-blue w-full text-white text-lg font-bold">
+      <div @click="closeMenu" class="flex lg:hidden justify-between h-[6vh] px-12 pt-6 pb-12 mt-12 bg-app-blue w-full text-white text-lg font-bold">
         <div>{{`${selectedExercises?.length} exercises added`}}</div>
         <div>
           <svg

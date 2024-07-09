@@ -35,7 +35,7 @@
                       alt="Image preview"
                     />
                     <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
-                    <input type="file" class="mt-1 block w-full" @change="handleFileChange" />
+                    <input type="file" v-on:change="handleFileChange" class="mt-1 block w-full" />
                 </div>                
                 <div class="mt-6">
                     <button type="submit" class="w-full bg-app-blue text-white py-2 px-4 rounded-md hover:bg-app-dark-blue">Create Exercise</button>
@@ -66,9 +66,9 @@
   const imagePreviewUrl = ref(null);
 
   const handleFileChange = (event) => {
-    form.profile_image = event.target.files[0];
-    if (form.profile_image) {
-      imagePreviewUrl.value = URL.createObjectURL(form.profile_image);
+    form.image = event.target.files[0];
+    if (form.image) {
+      imagePreviewUrl.value = URL.createObjectURL(form.image);
     }
   }
   
@@ -77,7 +77,13 @@
   };
 
   const createExercise = () => {
-    form.post("/exercises");
+    form.post("/exercises", {
+      onSuccess: () => {
+        closeModal();
+        form.reset();
+        imagePreviewUrl.value = null;
+      },
+    });
   };
   
   </script>

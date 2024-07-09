@@ -39,22 +39,32 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'instructions' => 'required|string',
+            'image' => 'nullable|file|image|max:1024', // 1MB Max
         ]);
     
-        $exercise = new Exercise();
-        $exercise->title = $validatedData['title'];
-        $exercise->description = $validatedData['description'];
-        $exercise->instructions = $validatedData['instructions'];
-        $exercise->isPrivate = true;
-        $exercise->user_id = Auth::id();
+        $imagePath = null;
     
-        $exercise->save();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('img'), $imageName);
+            $imagePath = 'img/' . $imageName;
+        }
+        
+        Exercise::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'instructions' => $request->instructions,
+            'image' => $imagePath,
+            'isPrivate' => true,
+            'user_id' => Auth::id(), // Assuming the user is logged in
+        ]);
     
-        return response()->json(['message' => 'Exercise created successfully'], 201);
+        return redirect()->route('dashboard')->with('success', 'Exercise created successfully!');
     }
 
     /**

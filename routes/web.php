@@ -29,7 +29,7 @@ Route::get('/dashboard', function () {
                         ->where('user_id', $userId);
               });
     })->get();
-    return Inertia::render('Dashboard', ['exercises' => $exercises]);
+    return Inertia::render('Dashboard', ['exercises' => $exercises, 'userId' => $userId]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/home-exercise-programs/{homeExerciseProgram}/add-user-exercises', [HomeExerciseProgramController::class, 'addUserExercises'])

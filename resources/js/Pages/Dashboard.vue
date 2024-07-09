@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import ExerciseCard from '@/Components/Exercise/ExerciseCard.vue';
 import CreateExerciseCard from '@/Components/Exercise/CreateExerciseCard.vue';
 import ExerciseSearch from '@/Components/Exercise/ExerciseSearch.vue';
@@ -12,10 +12,15 @@ import CreateExerciseModal from '@/Components/Exercise/CreateExerciseModal.vue';
 const props = defineProps({
   exercises: Array
 });
+const { props: pageProps } = usePage();
+const userId = pageProps.userId;
 
 const selectedExercises = ref([]);
 const searchedExercises = ref([]);
 const selectedExercise = ref(null);
+console.log(selectedExercise)
+const canEdit = computed(() => selectedExercise?.value?.isPrivate && selectedExercise?.value?.user_id === userId);
+console.log(canEdit)
 
 const addExercise = (exercise) => {
   if (!selectedExercises.value.some(e => e.id === exercise.id)) {
@@ -88,7 +93,7 @@ const closeExerciseModal = () => {
         </div>
       </div>
     </div>
-    <div @click="toggleRightAside" class="flex lg:hidden justify-between h-[6vh] px-12 py-4 bg-app-blue absolute bottom-0 w-full rounded-t-lg text-white text-lg font-bold">
+    <div @click="toggleRightAside" class="flex lg:hidden justify-between h-[6vh] px-12 pt-4 pb-12 bg-app-blue absolute bottom-0 w-full rounded-t-lg text-white text-lg font-bold">
       <div>{{`${selectedExercises?.length} exercises added`}}</div>
       <div>
         <svg 
@@ -113,6 +118,7 @@ const closeExerciseModal = () => {
     <ExerciseDetailsModal 
       v-if="selectedExercise"
       :exercise="selectedExercise"
+      :canEdit="canEdit"
       :is-open="!!selectedExercise"
       :on-close="closeExerciseModal"
     />
