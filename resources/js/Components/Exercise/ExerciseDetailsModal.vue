@@ -25,7 +25,7 @@
         <div class="p-6">
           <h2 class="text-center text-2xl font-bold mb-4">{{ exercise.title }}</h2>
           <img :src="exerciseImage" alt="Exercise image" @error="setBackupImage" />
-          `
+          
           <div class="mt-12">
               <label for="description" class="my-8 font-bold text-lg"><u>Description</u></label>
               <p>{{ exercise.description }}</p>

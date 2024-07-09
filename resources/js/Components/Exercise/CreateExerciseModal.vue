@@ -49,6 +49,7 @@
   <script setup>
   import { ref } from "vue";
   import { useForm } from "@inertiajs/vue3";
+  import { toast } from "vue3-toastify";
 
   const form = useForm({
     title: "",
@@ -64,6 +65,7 @@
   });
 
   const imagePreviewUrl = ref(null);
+  const isLoading = ref(false);
 
   const handleFileChange = (event) => {
     form.image = event.target.files[0];
@@ -76,15 +78,31 @@
     props.onClose();
   };
 
-  const createExercise = () => {
-    form.post("/exercises", {
-      onSuccess: () => {
-        closeModal();
-        form.reset();
+  const createExercise = async () => {
+    isLoading.value = true;
+
+    try {
+        const response = await form.post('/exercises');
+        isLoading.value = false;
+        closeModal(); 
+        form.reset(); 
         imagePreviewUrl.value = null;
-      },
-    });
-  };
+
+        toast("Exercise Successfully Created!", {
+          "theme": "auto",
+          "type": "success",
+          "position": "top-center"
+        })
+    } catch (error) {
+        isLoading.value = false;
+        console.error('Error creating exercise:', error);
+        toast("There was a problem creating the exercise", {
+          "theme": "auto",
+          "type": "error",
+          "position": "top-center"
+        })
+    }
+};
   
   </script>
   

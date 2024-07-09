@@ -54,14 +54,14 @@ class ExerciseController extends Controller
             $image->move(public_path('img'), $imageName);
             $imagePath = 'img/' . $imageName;
         }
-        
+
         Exercise::create([
             'title' => $request->title,
             'description' => $request->description,
             'instructions' => $request->instructions,
             'image' => $imagePath,
             'isPrivate' => true,
-            'user_id' => Auth::id(), // Assuming the user is logged in
+            'user_id' => Auth::id(), 
         ]);
     
         return redirect()->route('dashboard')->with('success', 'Exercise created successfully!');

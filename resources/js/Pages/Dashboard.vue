@@ -18,9 +18,7 @@ const userId = pageProps.userId;
 const selectedExercises = ref([]);
 const searchedExercises = ref([]);
 const selectedExercise = ref(null);
-console.log(selectedExercise)
 const canEdit = computed(() => selectedExercise?.value?.isPrivate && selectedExercise?.value?.user_id === userId);
-console.log(canEdit)
 
 const addExercise = (exercise) => {
   if (!selectedExercises.value.some(e => e.id === exercise.id)) {
